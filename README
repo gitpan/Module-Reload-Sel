@@ -1,0 +1,67 @@
+Module::Reload::Selective -- reload perl modules during development
+
+Utility for module developers to selectively reload needed modules
+and/or conditionally augment @INC with additional, per-developer
+library directories, at development time based on environment
+variables.  
+
+Particularly helpful in conjunction with mod_perl applications where
+some or all application logic resides in separate Perl modules that
+would otherwise not get reloaded until the server restarts.
+
+Copyright (c) 2002, Chris Thorman.
+
+Released to the public under the terms of the Perl Artistic License.
+
+=head1 SYNOPSIS
+
+Instead of:
+
+	use                                   Foobar::MyModule;
+
+Do this:
+
+	use Module::Reload::Selective; 
+	&Module::Reload::Selective->reload(qw(Foobar::MyModule));
+
+Or, if you need the "import" semantics of "use", do this:
+
+	use                        Foobar::MyModule    (@ImportArgs);
+
+Do this:
+
+	use Module::Reload::Selective; 
+ 	Module::Reload::Selective->reload(qw(Foobar::MyModule));
+	import                     Foobar::MyModule    (@ImportArgs);
+
+
+... then configure your server or other runtime environment settings
+to trigger Module::Reload::Selective to only kick in when you need.
+
+For example: you could have it kick in only when the web server is
+running on a particular port number or particular (development) host.
+
+
+FURTHER INFO
+
+Extensive discussion and examples are given in the source / docs.
+
+Read the full documentation in Selective.pm.
+
+Or, after installing, read the man page using:
+
+	man     Module::Reload::Selective
+	perldoc Module::Reload::Selective
+
+
+BUILDING
+
+perl Makefile.PL
+make
+make test
+make install
+
+
+FEEDBACK TO
+
+Chris Thorman, chris@thorman.com
