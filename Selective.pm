@@ -1,25 +1,17 @@
 #!/usr/bin/perl
-
-package Module::Reload::Selective;               $VERSION = "1.00";
+## Emacs: -*- tab-width: 4; -*-
 
 use strict;
 
+package Module::Reload::Selective;           
+
+use vars qw($VERSION);              $VERSION = '1.01';
+
 =pod
 
-=head1 Module::Reload::Selective
+=head1 NAME
 
-Utility for module developers to selectively reload needed modules
-and/or conditionally augment @INC with additional, per-developer
-library directories, at development time based on environment
-variables.  
-
-Particularly helpful in conjunction with mod_perl applications where
-some or all application logic resides in separate Perl modules that
-would otherwise not get reloaded until the server restarts.
-
-Copyright (c) 2002, Chris Thorman.
-
-Released to the public under the terms of the Perl Artistic License.
+Module::Reload::Selective - Reload perl modules during development
 
 =head1 SYNOPSIS
 
@@ -49,8 +41,22 @@ to trigger Module::Reload::Selective to only kick in when you need.
 For example: you could have it kick in only when the web server is
 running on a particular port number or particular (development) host.
 
-
 =head1 OVERVIEW
+
+Utility for module developers to selectively reload needed modules
+and/or conditionally augment @INC with additional, per-developer
+library directories, at development time based on environment
+variables.
+
+Particularly helpful in conjunction with mod_perl applications where
+some or all application logic resides in separate Perl modules that
+would otherwise not get reloaded until the server restarts.
+
+Copyright (c) 2002, Chris Thorman.
+
+Released to the public under the terms of the Perl Artistic License.
+
+=head1 DETAILS
 
 This module defines a "reload" routine that scripts, CGI scripts,
 Embperl scripts, handlers, etc.  can use to reload (re-require) a
@@ -362,25 +368,47 @@ reloads.  I tried to emulate a trick used by Doug MacEachern in
 Apache::StatINC to prevent this from happening, but in this version, I
 haven't been able to get that to work.  Suggestions / fixes welcome.
 
-=head1 AUTHOR
-
-Chris Thorman <chris@thorman.com>
+=head1 THANKS
 
 Thanks to Joshua Pritikin for suggestions and the use of the
 Module::Reload namespace.
 
-=head1 COPYRIGHT
+=head1 INSTALLATION
 
-Copyright 2002, Chris Thorman.
+Using CPAN module:
 
-Available for use by anyone under the GNU General Public License.  Not
-formally supported, but further comments, suggestions, and corrections
-are heartily solicited.
+    perl -MCPAN -e 'install Module::Reload::Selective'
+
+Or manually:
+
+    tar xzvf Module-Reload-Sel*gz
+    cd Module-Reload-Sel*-?.??
+    perl Makefile.PL
+    make
+    make test
+    make install
 
 =head1 SEE ALSO
 
+The Module::Reload::Selective home page:
+
+    http://christhorman.com/projects/perl/Module-Reload-Selective/
+
 Apache(3), mod_perl, http://perl.apache.org/src/contrib,
 Module::Reload, Apache::StatINC.
+
+The implementation in Selective.pm.
+
+The perlmod manual page.
+
+=head1 AUTHOR
+
+Chris Thorman <chthorman@cpan.org>
+
+Copyright (c) 1995-2002 Chris Thorman.  All rights reserved.  
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
